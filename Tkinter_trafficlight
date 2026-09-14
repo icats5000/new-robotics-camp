@@ -1,0 +1,139 @@
+#!/usr/bin/python
+import RPi.GPIO as GPIO
+from Tkinter import *
+import tkMessageBox
+import Tkinter
+import time
+import os
+ 
+ 
+#create pin variabls
+red_pin=12
+yellow_pin=16
+green_pin=18
+blue_pin=13 
+#set which pin numbers names we are using..
+GPIO.setmode(GPIO.BOARD)
+#make all pins outputs
+GPIO.setup(red_pin,GPIO.OUT)
+GPIO.setup(yellow_pin,GPIO.OUT)
+GPIO.setup(green_pin,GPIO.OUT)
+GPIO.setup(blue_pin,GPIO.OUT)
+ 
+#create root window
+root = Tkinter.Tk()
+root.minsize(width=500, height=400)
+ 
+#create a string variable to use for the label
+var = StringVar()
+#create the label
+title_lbl = Label( root, textvariable=var)
+#set the value of the string for the label
+var.set("Click on the button for each light")
+#add label to main window
+title_lbl.pack()
+ 
+ 
+ 
+#create the function for red  button click
+def red_on():
+    #this allows us to access variables outside of this function
+    global red_pin
+    global yellow_pin
+    global green_pin
+    print("red button click")
+    #turn red pin on and the others off
+    GPIO.output(red_pin,GPIO.HIGH)
+    GPIO.output(yellow_pin,GPIO.LOW)
+    GPIO.output(green_pin,GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(red_pin,GPIO.LOW)
+ 
+#create the function for yellow  button click
+def yellow_on():
+    os.system("espeak -ven+m4 -k15 -s180 -g7 'Hello Mom' 2>/dev/null")
+    #this allows us to access variables outside of this function
+    global red_pin
+    global yellow_pin
+    global green_pin
+    print ("yellow button click")
+    #turn yellow pin on and the others off
+    GPIO.output(red_pin,GPIO.LOW)
+    GPIO.output(yellow_pin,GPIO.HIGH)
+    GPIO.output(green_pin,GPIO.LOW)
+    time.sleep(2)
+    GPIO.output(yellow_pin,GPIO.LOW)
+    os.system("espeak -ven+f2 -k15 -s280 -g7 'Goodbye Mom'2>/dev/null")
+ 
+ 
+#create the function for red  button click
+def green_on():
+    #this allows us to access variables outside of this function
+    global red_pin
+    global yellow_pin
+    global green_pin
+    print ("green button click")
+    #turn green pin on and the others off
+    GPIO.output(red_pin,GPIO.LOW)
+    GPIO.output(yellow_pin,GPIO.LOW)
+    GPIO.output(green_pin,GPIO.HIGH)
+    time.sleep(2)
+    GPIO.output(green_pin,GPIO.LOW)
+ 
+#create the function for all  button click
+def all_on():
+    #this allows us to access variables outside of this function
+    global red_pin
+    global yellow_pin
+    global green_pin
+    print ("green button click")
+    #turn green pin on and the others off
+    GPIO.output(red_pin,GPIO.HIGH)
+    GPIO.output(yellow_pin,GPIO.HIGH)
+    GPIO.output(green_pin,GPIO.HIGH)
+    time.sleep(2)
+    GPIO.output(red_pin,GPIO.LOW)
+    GPIO.output(yellow_pin,GPIO.LOW)
+    GPIO.output(green_pin,GPIO.LOW)
+
+def blue_on():
+    #this allows us to access variables outside of this function
+    global red_pin
+    global yellow_pin
+    global green_pin
+    print ("blue button click")
+    #turn blue pin on and the others off
+    GPIO.output(red_pin,GPIO.LOW)
+    GPIO.output(yellow_pin,GPIO.LOW)
+    GPIO.output(blue_pin,GPIO.HIGH)
+    time.sleep(2)
+    GPIO.output(green_pin,GPIO.LOW)
+
+#create blue button
+blue_btn = Tkinter.Button(root, text ="blue", command = blue_on)
+#add button to root window
+blue_btn.pack()
+ 
+#create red button
+red_btn = Tkinter.Button(root, text ="red", command = red_on)
+#add button to root window
+red_btn.pack()
+ 
+#create red button
+yellow_btn = Tkinter.Button(root, text ="yellow", command = yellow_on)
+#add button to root window
+yellow_btn.pack()
+ 
+#create red button
+green_btn = Tkinter.Button(root, text ="green", command = green_on)
+#add button to root window
+green_btn.pack()
+ 
+#create all button
+all_btn = Tkinter.Button(root, text ="all", command = all_on)
+#add button to root window
+all_btn.pack()
+ 
+root.mainloop()
+
+GPIO.cleanup()

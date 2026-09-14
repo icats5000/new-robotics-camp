@@ -1,0 +1,14 @@
+What I'm working on: A GPS robot
+
+Current Task: Get a robot base, code a movement system.
+
+Task List:
+- Find a robot base [UNFINISHED]
+- Code a movement system [UNFINISHED]
+- Create a GPS system to get to specific points [UNFINISHED]
+- Make it compatible with multiple different types of terrain [UNFINISHED]
+- Try to get it to make a simple trip down the sidewalk and back [UNFINISHED]
+- Make a control override if it doesn't get the route right [UNFINISHED]
+- Make a tracking system for it [UNFINISHED]
+
+Project State: 0% Finished
